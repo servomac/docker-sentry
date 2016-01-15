@@ -21,6 +21,7 @@
 #  SENTRY_EMAIL_USE_TLS
 #  SENTRY_MAILGUN_API_KEY
 #  SENTRY_SECRET_KEY
+#  ALLOW_REGISTRATION
 from sentry.conf.server import *  # NOQA
 
 import os
@@ -238,3 +239,7 @@ MAILGUN_API_KEY = os.environ.get('SENTRY_MAILGUN_API_KEY') or ''
 secret_key = os.environ.get('SENTRY_SECRET_KEY')
 if secret_key:
     SECRET_KEY = secret_key
+
+allow_registration = os.environ.get('ALLOW_REGISTRATION')
+if allow_registration:
+    SENTRY_FEATURES['auth:register'] = allow_registration
