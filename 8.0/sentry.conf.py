@@ -242,5 +242,4 @@ if secret_key:
     SECRET_KEY = secret_key
 
 allow_registration = strtobool(os.environ.get('ALLOW_REGISTRATION', 'True'))
-if allow_registration:
-    SENTRY_FEATURES['auth:register'] = True
+SENTRY_FEATURES['auth:register'] = allow_registration
