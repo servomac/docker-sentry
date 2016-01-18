@@ -24,7 +24,7 @@
 #  ALLOW_REGISTRATION
 from sentry.conf.server import *  # NOQA
 
-import ast
+from distutils.util import strtobool
 import os
 import os.path
 
@@ -241,5 +241,6 @@ secret_key = os.environ.get('SENTRY_SECRET_KEY')
 if secret_key:
     SECRET_KEY = secret_key
 
-allow_registration = os.environ.get('ALLOW_REGISTRATION', 'True')
-SENTRY_FEATURES['auth:register'] = ast.literal_eval(allow_registration)
+allow_registration = strtobool(os.environ.get('ALLOW_REGISTRATION', 'True'))
+if allow_registration:
+    SENTRY_FEATURES['auth:register'] = True
